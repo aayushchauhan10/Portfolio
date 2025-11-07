@@ -1,10 +1,17 @@
-
 "use client";
 import Section from "./Section";
 import Card from "./Card";
 import data from "../data/resume";
-import { motion } from "framer-motion";
-import { Mail, Phone, Linkedin, Github, ArrowUpRight, Copy } from "lucide-react";
+import { m } from "framer-motion";
+
+import {
+  Mail,
+  Phone,
+  Linkedin,
+  Github,
+  ArrowUpRight,
+  Copy,
+} from "lucide-react";
 import { useState } from "react";
 
 export default function Contact() {
@@ -25,7 +32,7 @@ export default function Contact() {
       gradient: "from-blue-500/20 via-cyan-500/20 to-teal-500/20",
       iconColor: "text-cyan-400",
       accentGradient: "from-blue-500 via-cyan-500 to-teal-500",
-      copyable: true
+      copyable: true,
     },
     {
       icon: Phone,
@@ -35,7 +42,7 @@ export default function Contact() {
       gradient: "from-green-500/20 via-emerald-500/20 to-teal-500/20",
       iconColor: "text-emerald-400",
       accentGradient: "from-green-500 via-emerald-500 to-teal-500",
-      copyable: true
+      copyable: true,
     },
     {
       icon: Linkedin,
@@ -45,7 +52,7 @@ export default function Contact() {
       gradient: "from-blue-600/20 via-blue-500/20 to-indigo-500/20",
       iconColor: "text-blue-400",
       accentGradient: "from-blue-600 via-blue-500 to-indigo-500",
-      external: true
+      external: true,
     },
     {
       icon: Github,
@@ -55,8 +62,8 @@ export default function Contact() {
       gradient: "from-purple-500/20 via-violet-500/20 to-indigo-500/20",
       iconColor: "text-purple-400",
       accentGradient: "from-purple-500 via-violet-500 to-indigo-500",
-      external: true
-    }
+      external: true,
+    },
   ];
 
   return (
@@ -65,7 +72,7 @@ export default function Contact() {
         {contactMethods.map((method, i) => {
           const Icon = method.icon;
           return (
-            <motion.div
+            <m.div
               key={i}
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -79,13 +86,17 @@ export default function Contact() {
                 />
 
                 {/* Decorative corner gradient */}
-                <div className={`absolute -top-20 -right-20 w-48 h-48 bg-gradient-to-br ${method.gradient} rounded-full blur-3xl opacity-30 group-hover:opacity-60 transition-opacity duration-500`} />
+                <div
+                  className={`absolute -top-20 -right-20 w-48 h-48 bg-gradient-to-br ${method.gradient} rounded-full blur-3xl opacity-30 group-hover:opacity-60 transition-opacity duration-500`}
+                />
 
                 {/* Content */}
                 <div className="relative z-10 flex flex-col h-full">
                   {/* Icon Header */}
                   <div className="flex items-center justify-between mb-4">
-                    <div className={`p-3 rounded-xl bg-gradient-to-br ${method.gradient} border border-white/20 backdrop-blur-sm group-hover:scale-110 transition-transform duration-300`}>
+                    <div
+                      className={`p-3 rounded-xl bg-gradient-to-br ${method.gradient} border border-white/20 backdrop-blur-sm group-hover:scale-110 transition-transform duration-300`}
+                    >
                       <Icon className={`w-6 h-6 ${method.iconColor}`} />
                     </div>
                     {method.external && (
@@ -94,7 +105,9 @@ export default function Contact() {
                   </div>
 
                   {/* Label */}
-                  <h3 className={`text-lg font-bold text-white mb-2 group-hover:${method.iconColor} transition-colors`}>
+                  <h3
+                    className={`text-lg font-bold text-white mb-2 group-hover:${method.iconColor} transition-colors`}
+                  >
                     {method.label}
                   </h3>
 
@@ -115,12 +128,16 @@ export default function Contact() {
                     </a>
                     {method.copyable && (
                       <button
-                        onClick={() => copyToClipboard(method.value, method.label)}
+                        onClick={() =>
+                          copyToClipboard(method.value, method.label)
+                        }
                         className="px-3 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 transition-all duration-300 group-hover:scale-105"
                         title="Copy to clipboard"
                       >
                         {copiedField === method.label ? (
-                          <span className="text-xs text-green-400 font-medium">✓</span>
+                          <span className="text-xs text-green-400 font-medium">
+                            ✓
+                          </span>
                         ) : (
                           <Copy className="w-4 h-4 text-white/60" />
                         )}
@@ -130,15 +147,17 @@ export default function Contact() {
                 </div>
 
                 {/* Bottom accent */}
-                <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${method.accentGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                <div
+                  className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${method.accentGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                />
               </Card>
-            </motion.div>
+            </m.div>
           );
         })}
       </div>
 
       {/* Additional CTA Section */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -148,7 +167,7 @@ export default function Contact() {
         <Card className="relative overflow-hidden group">
           {/* Animated gradient background */}
           <div className="absolute inset-0 bg-gradient-to-r from-brand-500/20 via-purple-500/20 to-pink-500/20 opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
-          
+
           {/* Decorative elements */}
           <div className="absolute -top-24 -left-24 w-48 h-48 bg-gradient-to-br from-brand-500/30 to-purple-500/30 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
           <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
@@ -158,7 +177,8 @@ export default function Contact() {
               Let&apos;s Work Together
             </h3>
             <p className="text-white/70 text-base md:text-lg mb-6 max-w-2xl mx-auto">
-              I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+              I&apos;m always open to discussing new projects, creative ideas,
+              or opportunities to be part of your vision.
             </p>
             <a
               href={`mailto:${data.contact.email}`}
@@ -169,7 +189,7 @@ export default function Contact() {
             </a>
           </div>
         </Card>
-      </motion.div>
+      </m.div>
     </Section>
   );
 }

@@ -2,7 +2,7 @@
 import Section from "./Section";
 import Card from "./Card";
 import data from "../data/resume";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Award, Calendar, Shield, Sparkles } from "lucide-react";
 
 export default function Certs() {
@@ -16,7 +16,7 @@ export default function Certs() {
     <Section id="certifications" title="Certifications">
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {data.certifications.map((c, i) => (
-          <motion.div
+          <m.div
             key={i}
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -67,7 +67,7 @@ export default function Certs() {
               {/* Bottom accent */}
               <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </Card>
-          </motion.div>
+          </m.div>
         ))}
       </div>
     </Section>

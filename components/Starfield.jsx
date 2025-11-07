@@ -10,8 +10,8 @@ export default function Starfield() {
     const DPR = window.devicePixelRatio || 1;
     const stars = [];
     const shootingStars = [];
-    const STAR_COUNT = 200;
-    const MAX_SHOOTING_STARS = 8;
+    const STAR_COUNT = 120; // Reduced from 200 for better performance
+    const MAX_SHOOTING_STARS = 5; // Reduced from 8
 
     // Color palette for shooting stars
     const colors = [
@@ -109,8 +109,8 @@ export default function Starfield() {
         }
       }
 
-      // Randomly create new shooting stars (higher frequency)
-      if (Math.random() < 0.025 && shootingStars.length < MAX_SHOOTING_STARS) {
+      // Randomly create new shooting stars (optimized frequency)
+      if (Math.random() < 0.015 && shootingStars.length < MAX_SHOOTING_STARS) {
         createShootingStar();
       }
     }
@@ -219,11 +219,15 @@ export default function Starfield() {
     }
     draw();
 
+    let resizeTimeout;
     const onResize = () => {
-      resize();
-      initStars();
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        resize();
+        initStars();
+      }, 150);
     };
-    window.addEventListener("resize", onResize);
+    window.addEventListener("resize", onResize, { passive: true });
     return () => {
       cancelAnimationFrame(animationId);
       window.removeEventListener("resize", onResize);
@@ -233,6 +237,7 @@ export default function Starfield() {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 w-full h-full opacity-60"
+      style={{ willChange: "contents" }}
     />
   );
 }

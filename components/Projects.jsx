@@ -2,7 +2,7 @@
 import Section from "./Section";
 import Card from "./Card";
 import data from "../data/resume";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ExternalLink, Code2, Sparkles } from "lucide-react";
 
 export default function Projects() {
@@ -36,7 +36,7 @@ export default function Projects() {
     <Section id="projects" title="Projects">
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {data.projects.map((p, i) => (
-          <motion.div
+          <m.div
             key={i}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -81,7 +81,7 @@ export default function Projects() {
                 {/* Tech Stack */}
                 <div className="flex flex-wrap gap-2">
                   {p.stack.map((tech, j) => (
-                    <motion.span
+                    <m.span
                       key={j}
                       initial={{ opacity: 0, scale: 0.8 }}
                       whileInView={{ opacity: 1, scale: 1 }}
@@ -93,7 +93,7 @@ export default function Projects() {
                       } backdrop-blur-sm transition-all hover:scale-110`}
                     >
                       {tech}
-                    </motion.span>
+                    </m.span>
                   ))}
                 </div>
               </div>
@@ -101,7 +101,7 @@ export default function Projects() {
               {/* Bottom gradient accent */}
               <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </Card>
-          </motion.div>
+          </m.div>
         ))}
       </div>
     </Section>

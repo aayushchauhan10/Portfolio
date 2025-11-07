@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 
 export default function Hero() {
@@ -39,7 +39,7 @@ export default function Hero() {
           {/* Content */}
           <div className="relative z-10">
             {/* Status badge */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -49,7 +49,7 @@ export default function Hero() {
               <span className="text-xs text-green-400 font-medium">
                 Available for opportunities
               </span>
-            </motion.div>
+            </m.div>
 
             {/* Title */}
             <div ref={titleRef} className="relative">
@@ -65,7 +65,7 @@ export default function Hero() {
             </div>
 
             {/* Enhanced description */}
-            <motion.p
+            <m.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
@@ -85,10 +85,10 @@ export default function Hero() {
               <span className="text-cyan-400 font-medium">clean code</span>, and{" "}
               <span className="text-orange-400 font-medium">delightful UX</span>
               .
-            </motion.p>
+            </m.p>
 
             {/* Enhanced CTA buttons */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1 }}
@@ -120,7 +120,7 @@ export default function Hero() {
                 <Github className="w-4 h-4" />
                 GitHub
               </a>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </div>

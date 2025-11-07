@@ -2,7 +2,7 @@
 import Section from "./Section";
 import Card from "./Card";
 import data from "../data/resume";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { m, useScroll, useSpring } from "framer-motion";
 import { Briefcase, Calendar, ChevronRight } from "lucide-react";
 import { useRef } from "react";
 
@@ -63,7 +63,7 @@ export default function Experience() {
         <div className="absolute left-6 top-8 bottom-8 w-px bg-white/10 hidden md:block" />
 
         {/* Animated timeline line */}
-        <motion.div
+        <m.div
           className="absolute left-6 top-8 w-px bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500 hidden md:block origin-top"
           style={{
             scaleY,
@@ -73,7 +73,7 @@ export default function Experience() {
 
         <div className="grid gap-6">
           {data.experience.map((job, i) => (
-            <motion.div
+            <m.div
               key={i}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -111,7 +111,7 @@ export default function Experience() {
                   {/* Bullet points */}
                   <ul className="mt-5 space-y-3">
                     {job.bullets.map((bullet, j) => (
-                      <motion.li
+                      <m.li
                         key={j}
                         initial={{ opacity: 0, x: -10 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -125,7 +125,7 @@ export default function Experience() {
                             __html: highlightTechnologies(bullet),
                           }}
                         />
-                      </motion.li>
+                      </m.li>
                     ))}
                   </ul>
                 </div>
@@ -133,7 +133,7 @@ export default function Experience() {
                 {/* Decorative corner gradient */}
                 <div className="absolute -bottom-12 -right-12 w-32 h-32 bg-gradient-to-tl from-blue-500/10 to-purple-500/10 rounded-full blur-2xl" />
               </Card>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

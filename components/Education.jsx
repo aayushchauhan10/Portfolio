@@ -2,7 +2,7 @@
 import Section from "./Section";
 import Card from "./Card";
 import data from "../data/resume";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { GraduationCap, Calendar, School } from "lucide-react";
 
 export default function Education() {
@@ -15,7 +15,7 @@ export default function Education() {
     <Section id="education" title="Education">
       <div className="grid md:grid-cols-2 gap-6">
         {data.education.map((e, i) => (
-          <motion.div
+          <m.div
             key={i}
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -59,7 +59,7 @@ export default function Education() {
               {/* Bottom accent */}
               <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </Card>
-          </motion.div>
+          </m.div>
         ))}
       </div>
     </Section>

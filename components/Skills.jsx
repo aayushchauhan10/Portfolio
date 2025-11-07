@@ -2,7 +2,7 @@
 import Section from "./Section";
 import data from "../data/resume";
 import Card from "./Card";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Code2, Database, Cloud, Palette, Server, Wrench } from "lucide-react";
 
 export default function Skills() {
@@ -93,7 +93,7 @@ export default function Skills() {
           const colors = colorMap[data.color];
 
           return (
-            <motion.div
+            <m.div
               key={category}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -125,7 +125,7 @@ export default function Skills() {
                   {/* Skills */}
                   <div className="flex flex-wrap gap-2">
                     {data.skills.map((skill, skillIndex) => (
-                      <motion.span
+                      <m.span
                         key={skill}
                         initial={{ opacity: 0, scale: 0.8 }}
                         whileInView={{ opacity: 1, scale: 1 }}
@@ -137,7 +137,7 @@ export default function Skills() {
                         className={`px-3 py-1.5 rounded-lg ${colors.bg} ${colors.text} ${colors.border} border text-xs font-medium backdrop-blur-sm cursor-default transition-all hover:${colors.glow} hover:shadow-lg`}
                       >
                         {skill}
-                      </motion.span>
+                      </m.span>
                     ))}
                   </div>
                 </div>
@@ -147,7 +147,7 @@ export default function Skills() {
                   className={`absolute bottom-0 left-0 right-0 h-1 ${colors.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
                 />
               </Card>
-            </motion.div>
+            </m.div>
           );
         })}
       </div>

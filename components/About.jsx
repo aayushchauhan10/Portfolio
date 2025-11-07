@@ -2,7 +2,7 @@
 import Section from "./Section";
 import Card from "./Card";
 import data from "../data/resume";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 export default function About() {
   return (
@@ -13,7 +13,7 @@ export default function About() {
 
         <div className="relative z-10">
           {/* Highlighted stat */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -24,10 +24,10 @@ export default function About() {
               2.4
             </span>
             <span className="text-sm text-white/70">Years of Experience</span>
-          </motion.div>
+          </m.div>
 
           {/* Enhanced summary text */}
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -49,9 +49,9 @@ export default function About() {
             <span className="text-purple-400 font-medium">JavaScript</span> and{" "}
             <span className="text-purple-400 font-medium">Python</span>{" "}
             ecosystems.
-          </motion.p>
+          </m.p>
 
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -66,9 +66,9 @@ export default function About() {
             with strong exposure to{" "}
             <span className="text-orange-400 font-medium">AWS (EC2, S3)</span>{" "}
             and <span className="text-cyan-400 font-medium">Docker</span>.
-          </motion.p>
+          </m.p>
 
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -84,7 +84,7 @@ export default function About() {
               efficient backend systems
             </span>{" "}
             leveraging RabbitMQ & TaskIQ.
-          </motion.p>
+          </m.p>
         </div>
       </Card>
     </Section>

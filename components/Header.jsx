@@ -1,5 +1,5 @@
 "use client";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -19,24 +19,33 @@ export default function Header() {
   ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+    let ticking = false;
 
-      // Update active section based on scroll position
-      const sections = navItems.map((item) => item.href.slice(1));
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 150 && rect.bottom >= 150) {
-            setActiveSection(`#${section}`);
-            break;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 20);
+
+          // Update active section based on scroll position
+          const sections = navItems.map((item) => item.href.slice(1));
+          for (const section of sections) {
+            const element = document.getElementById(section);
+            if (element) {
+              const rect = element.getBoundingClientRect();
+              if (rect.top <= 150 && rect.bottom >= 150) {
+                setActiveSection(`#${section}`);
+                break;
+              }
+            }
           }
-        }
+
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -65,7 +74,7 @@ export default function Header() {
   return (
     <header className="fixed top-0 inset-x-0 z-50">
       <div className="container max-w-6xl">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -76,7 +85,7 @@ export default function Header() {
           }`}
         >
           {/* Logo */}
-          <motion.a
+          <m.a
             href="#top"
             onClick={(e) => handleNavClick(e, "#top")}
             className="relative group"
@@ -90,43 +99,48 @@ export default function Header() {
               </span>
             </span>
             <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-brand-400 to-purple-500 group-hover:w-full transition-all duration-300" />
-          </motion.a>
+          </m.a>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1">
             {navItems.map((item, i) => (
-              <motion.a
+              <m.a
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: i * 0.05 }}
-                className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 group ${
+                className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${
                   activeSection === item.href
-                    ? "text-brand-400"
-                    : "text-white/80 hover:text-white"
+                    ? "text-white"
+                    : "text-white/70 hover:text-white/90"
                 }`}
               >
-                {/* Hover background */}
-                <span className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                {/* Active indicator */}
+                {/* Active sliding indicator */}
                 {activeSection === item.href && (
-                  <motion.span
-                    layoutId="activeSection"
-                    className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-500/30 to-purple-500/30 border border-brand-400/50"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  <m.span
+                    layoutId="activeNavIndicator"
+                    className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-500/40 via-purple-500/40 to-pink-500/40 border border-brand-400/60 shadow-lg shadow-brand-500/20"
+                    transition={{
+                      type: "spring",
+                      stiffness: 500,
+                      damping: 35,
+                      mass: 0.8,
+                    }}
                   />
                 )}
 
+                {/* Hover background */}
+                <span className="absolute inset-0 rounded-lg bg-gradient-to-br from-white/5 to-white/10 opacity-0 hover:opacity-100 transition-opacity duration-200" />
+
                 <span className="relative z-10">{item.label}</span>
-              </motion.a>
+              </m.a>
             ))}
           </nav>
 
           {/* CTA Button (Desktop) */}
-          <motion.a
+          <m.a
             href="#contact"
             onClick={(e) => handleNavClick(e, "#contact")}
             initial={{ opacity: 0, x: 20 }}
@@ -136,7 +150,7 @@ export default function Header() {
           >
             Let&apos;s Talk
             <ChevronRight className="w-4 h-4" />
-          </motion.a>
+          </m.a>
 
           {/* Mobile Menu Button */}
           <button
@@ -150,12 +164,12 @@ export default function Header() {
               <Menu className="w-5 h-5 text-white" />
             )}
           </button>
-        </motion.div>
+        </m.div>
 
         {/* Mobile Menu */}
         <AnimatePresence>
           {isMenuOpen && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: -20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
@@ -164,7 +178,7 @@ export default function Header() {
             >
               <nav className="flex flex-col p-2">
                 {navItems.map((item, i) => (
-                  <motion.a
+                  <m.a
                     key={item.href}
                     href={item.href}
                     onClick={(e) => handleNavClick(e, item.href)}
@@ -180,18 +194,18 @@ export default function Header() {
                     <div className="flex items-center justify-between">
                       <span>{item.label}</span>
                       {activeSection === item.href && (
-                        <motion.div
+                        <m.div
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
                           className="w-2 h-2 rounded-full bg-brand-400"
                         />
                       )}
                     </div>
-                  </motion.a>
+                  </m.a>
                 ))}
 
                 {/* Mobile CTA */}
-                <motion.a
+                <m.a
                   href="#contact"
                   onClick={(e) => handleNavClick(e, "#contact")}
                   initial={{ opacity: 0, y: 10 }}
@@ -201,9 +215,9 @@ export default function Header() {
                 >
                   Let&apos;s Talk
                   <ChevronRight className="w-4 h-4" />
-                </motion.a>
+                </m.a>
               </nav>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       </div>

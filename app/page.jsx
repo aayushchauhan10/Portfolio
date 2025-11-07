@@ -1,5 +1,5 @@
-
 "use client";
+import { LazyMotion, domAnimation } from "framer-motion";
 import LenisProvider from "../components/LenisProvider";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
@@ -16,22 +16,27 @@ import Starfield from "../components/Starfield";
 
 export default function Page() {
   return (
-    <LenisProvider>
-      <main className="relative min-h-screen bg-black text-white">
-        <div className="absolute inset-0 bg-stars" />
-        <Starfield />
-        <Aurora />
-        <Header />
-        <Hero />
-        <About />
-        <Experience />
-        <Projects />
-        <Skills />
-        <Education />
-        <Certs />
-        <Contact />
-        <Footer />
-      </main>
-    </LenisProvider>
+    <LazyMotion features={domAnimation} strict>
+      <LenisProvider>
+        <main className="relative min-h-screen bg-black text-white">
+          <div
+            className="absolute inset-0 bg-stars"
+            style={{ willChange: "auto" }}
+          />
+          <Starfield />
+          <Aurora />
+          <Header />
+          <Hero />
+          <About />
+          <Experience />
+          <Projects />
+          <Skills />
+          <Education />
+          <Certs />
+          <Contact />
+          <Footer />
+        </main>
+      </LenisProvider>
+    </LazyMotion>
   );
 }

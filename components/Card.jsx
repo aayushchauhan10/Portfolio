@@ -1,11 +1,15 @@
-
 "use client";
-import { useSpring, animated } from "react-spring";
-export default function Card({ children, className = "" }) {
-  const [style, api] = useSpring(() => ({ y: 0, boxShadow: '0 10px 30px rgba(0,0,0,0.12)' }));
+import { memo } from "react";
+
+const Card = memo(function Card({ children, className = "" }) {
   return (
-    <animated.div onMouseEnter={() => api.start({ y: -6 })} onMouseLeave={() => api.start({ y: 0 })} style={style} className={`rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-5 ${className}`}>
+    <div
+      className={`rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-5 transition-transform duration-300 hover:-translate-y-1.5 will-change-transform ${className}`}
+      style={{ transform: "translate3d(0, 0, 0)" }}
+    >
       {children}
-    </animated.div>
+    </div>
   );
-}
+});
+
+export default Card;
